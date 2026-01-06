@@ -1,0 +1,3385 @@
+openapi: 3.0.3
+info:
+  title: api
+  version: 1.47.0
+servers:
+- url: http://localhost:8080
+security:
+- bearerAuth: []
+tags:
+- name: AuthenticationMethodKubernetesService
+- name: AuthenticationMethodOIDCService
+- name: AuthenticationMethodTokenService
+- name: AuthenticationService
+- name: EvaluationService
+- name: Flipt
+- name: OFREPService
+paths:
+  /api/v1/namespaces:
+    get:
+      operationId: listNamespaces
+      parameters:
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NamespaceList"
+          description: OK
+      tags:
+      - Flipt
+      - NamespacesService
+    post:
+      operationId: createNamespace
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateNamespaceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Namespace"
+          description: OK
+      tags:
+      - Flipt
+      - NamespacesService
+  /api/v1/namespaces/{key}:
+    delete:
+      operationId: deleteNamespace
+      parameters:
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: force
+        required: false
+        schema:
+          type: boolean
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - NamespacesService
+    get:
+      operationId: getNamespace
+      parameters:
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Namespace"
+          description: OK
+      tags:
+      - Flipt
+      - NamespacesService
+    put:
+      operationId: updateNamespace
+      parameters:
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateNamespaceRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Namespace"
+          description: OK
+      tags:
+      - Flipt
+      - NamespacesService
+  /api/v1/namespaces/{namespaceKey}/flags:
+    get:
+      operationId: listFlags
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FlagList"
+          description: OK
+      tags:
+      - Flipt
+      - FlagsService
+    post:
+      operationId: createFlag
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateFlagRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Flag"
+          description: OK
+      tags:
+      - Flipt
+      - FlagsService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/rollouts:
+    get:
+      operationId: listRollouts
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RolloutList"
+          description: OK
+      tags:
+      - Flipt
+      - RolloutsService
+    post:
+      operationId: createRollout
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRolloutRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rollout"
+          description: OK
+      tags:
+      - Flipt
+      - RolloutsService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/rollouts/order:
+    put:
+      operationId: orderRollouts
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderRolloutsRequest"
+        required: true
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - RolloutsService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/rollouts/{id}:
+    delete:
+      operationId: deleteRollout
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - RolloutsService
+    get:
+      operationId: getRollout
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rollout"
+          description: OK
+      tags:
+      - Flipt
+      - RolloutsService
+    put:
+      operationId: updateRollout
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRolloutRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rollout"
+          description: OK
+      tags:
+      - Flipt
+      - RolloutsService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/rules:
+    get:
+      operationId: listRules
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RuleList"
+          description: OK
+      tags:
+      - Flipt
+      - RulesService
+    post:
+      operationId: createRule
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRuleRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rule"
+          description: OK
+      tags:
+      - Flipt
+      - RulesService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/rules/order:
+    put:
+      operationId: orderRules
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OrderRulesRequest"
+        required: true
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - RulesService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/rules/{id}:
+    delete:
+      operationId: deleteRule
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - RulesService
+    get:
+      operationId: getRule
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rule"
+          description: OK
+      tags:
+      - Flipt
+      - RulesService
+    put:
+      operationId: updateRule
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateRuleRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Rule"
+          description: OK
+      tags:
+      - Flipt
+      - RulesService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/rules/{ruleId}/distributions:
+    post:
+      operationId: createDistribution
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ruleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateDistributionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Distribution"
+          description: OK
+      tags:
+      - Flipt
+      - DistributionsService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/rules/{ruleId}/distributions/{id}:
+    delete:
+      operationId: deleteDistribution
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ruleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: variantId
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - DistributionsService
+    put:
+      operationId: updateDistribution
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: ruleId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateDistributionRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Distribution"
+          description: OK
+      tags:
+      - Flipt
+      - DistributionsService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/variants:
+    post:
+      operationId: createVariant
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateVariantRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Variant"
+          description: OK
+      tags:
+      - Flipt
+      - VariantsService
+  /api/v1/namespaces/{namespaceKey}/flags/{flagKey}/variants/{id}:
+    delete:
+      operationId: deleteVariant
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - VariantsService
+    put:
+      operationId: updateVariant
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: flagKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateVariantRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Variant"
+          description: OK
+      tags:
+      - Flipt
+      - VariantsService
+  /api/v1/namespaces/{namespaceKey}/flags/{key}:
+    delete:
+      operationId: deleteFlag
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - FlagsService
+    get:
+      operationId: getFlag
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Flag"
+          description: OK
+      tags:
+      - Flipt
+      - FlagsService
+    put:
+      operationId: updateFlag
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateFlagRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Flag"
+          description: OK
+      tags:
+      - Flipt
+      - FlagsService
+  /api/v1/namespaces/{namespaceKey}/segments:
+    get:
+      operationId: listSegments
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SegmentList"
+          description: OK
+      tags:
+      - Flipt
+      - SegmentsService
+    post:
+      operationId: createSegment
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateSegmentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Segment"
+          description: OK
+      tags:
+      - Flipt
+      - SegmentsService
+  /api/v1/namespaces/{namespaceKey}/segments/{key}:
+    delete:
+      operationId: deleteSegment
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - SegmentsService
+    get:
+      operationId: getSegment
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: reference
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Segment"
+          description: OK
+      tags:
+      - Flipt
+      - SegmentsService
+    put:
+      operationId: updateSegment
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateSegmentRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Segment"
+          description: OK
+      tags:
+      - Flipt
+      - SegmentsService
+  /api/v1/namespaces/{namespaceKey}/segments/{segmentKey}/constraints:
+    post:
+      operationId: createConstraint
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: segmentKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateConstraintRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Constraint"
+          description: OK
+      tags:
+      - Flipt
+      - ConstraintsService
+  /api/v1/namespaces/{namespaceKey}/segments/{segmentKey}/constraints/{id}:
+    delete:
+      operationId: deleteConstraint
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: segmentKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - Flipt
+      - ConstraintsService
+    put:
+      operationId: updateConstraint
+      parameters:
+      - explode: false
+        in: path
+        name: namespaceKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: segmentKey
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateConstraintRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Constraint"
+          description: OK
+      tags:
+      - Flipt
+      - ConstraintsService
+  /auth/v1/method/kubernetes/serviceaccount:
+    post:
+      operationId: kubernetesVerifyServiceAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/VerifyServiceAccountRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VerifyServiceAccountResponse"
+          description: OK
+      tags:
+      - AuthenticationMethodKubernetesService
+  /auth/v1/method/oidc/{provider}/authorize:
+    get:
+      operationId: oidcAuthorizeURL
+      parameters:
+      - explode: false
+        in: path
+        name: provider
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthorizeURLResponse"
+          description: OK
+      tags:
+      - AuthenticationMethodOIDCService
+  /auth/v1/method/oidc/{provider}/callback:
+    get:
+      operationId: oidcCallback
+      parameters:
+      - explode: false
+        in: path
+        name: provider
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: code
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: state
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CallbackResponse"
+          description: OK
+      tags:
+      - AuthenticationMethodOIDCService
+  /auth/v1/method/token:
+    post:
+      operationId: createMethodToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTokenRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateTokenResponse"
+          description: OK
+      tags:
+      - AuthenticationMethodTokenService
+  /auth/v1/self:
+    get:
+      operationId: getAuthSelf
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Authentication"
+          description: OK
+      tags:
+      - AuthenticationService
+  /auth/v1/self/expire:
+    put:
+      operationId: expireAuthSelf
+      parameters:
+      - explode: true
+        in: query
+        name: expiresAt
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - AuthenticationService
+  /auth/v1/tokens:
+    get:
+      operationId: listAuthTokens
+      parameters:
+      - explode: true
+        in: query
+        name: method
+        required: false
+        schema:
+          enum:
+          - METHOD_NONE
+          - METHOD_TOKEN
+          - METHOD_OIDC
+          - METHOD_KUBERNETES
+          - METHOD_GITHUB
+          - METHOD_JWT
+          - METHOD_CLOUD
+          format: enum
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: pageToken
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAuthenticationsResponse"
+          description: OK
+      tags:
+      - AuthenticationService
+  /auth/v1/tokens/{id}:
+    delete:
+      operationId: deleteAuthToken
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: OK
+      tags:
+      - AuthenticationService
+    get:
+      operationId: getAuthToken
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Authentication"
+          description: OK
+      tags:
+      - AuthenticationService
+  /evaluate/v1/batch:
+    post:
+      operationId: evaluateBatch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchEvaluationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchEvaluationResponse"
+          description: OK
+      tags:
+      - EvaluationService
+  /evaluate/v1/boolean:
+    post:
+      operationId: evaluateBoolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvaluationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BooleanEvaluationResponse"
+          description: OK
+      tags:
+      - EvaluationService
+  /evaluate/v1/variant:
+    post:
+      operationId: evaluateVariant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvaluationRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VariantEvaluationResponse"
+          description: OK
+      tags:
+      - EvaluationService
+  /ofrep/v1/configuration:
+    get:
+      description: OFREP provider configuration
+      operationId: ofrep.configuration
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProviderConfigurationResponse"
+          description: OK
+      tags:
+      - OFREPService
+  /ofrep/v1/evaluate/flags:
+    post:
+      description: OFREP bulk flag evaluation
+      operationId: ofrep.evaluateBulk
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvaluateBulkRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BulkEvaluationResponse"
+          description: OK
+      tags:
+      - OFREPService
+  /ofrep/v1/evaluate/flags/{key}:
+    post:
+      description: OFREP single flag evaluation
+      operationId: ofrep.evaluateFlag
+      parameters:
+      - explode: false
+        in: path
+        name: key
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EvaluateFlagRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EvaluatedFlag"
+          description: OK
+      tags:
+      - OFREPService
+components:
+  schemas:
+    Authentication:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        metadata:
+          key: metadata
+        method: METHOD_NONE
+        id: id
+        expiresAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        method:
+          enum:
+          - METHOD_NONE
+          - METHOD_TOKEN
+          - METHOD_OIDC
+          - METHOD_KUBERNETES
+          - METHOD_GITHUB
+          - METHOD_JWT
+          - METHOD_CLOUD
+          format: enum
+          type: string
+        expiresAt:
+          format: date-time
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    AuthorizeURLResponse:
+      example:
+        authorizeUrl: authorizeUrl
+      properties:
+        authorizeUrl:
+          type: string
+      type: object
+    BatchEvaluationRequest:
+      example:
+        reference: reference
+        requestId: requestId
+        requests:
+        - reference: reference
+          requestId: requestId
+          context:
+            key: context
+          entityId: entityId
+          flagKey: flagKey
+          namespaceKey: namespaceKey
+        - reference: reference
+          requestId: requestId
+          context:
+            key: context
+          entityId: entityId
+          flagKey: flagKey
+          namespaceKey: namespaceKey
+      properties:
+        requestId:
+          type: string
+        requests:
+          items:
+            $ref: "#/components/schemas/EvaluationRequest"
+          type: array
+        reference:
+          type: string
+      required:
+      - requests
+      type: object
+    BatchEvaluationResponse:
+      example:
+        requestId: requestId
+        responses:
+        - variantResponse:
+            reason: UNKNOWN_EVALUATION_REASON
+            requestId: requestId
+            match: true
+            segmentKeys:
+            - segmentKeys
+            - segmentKeys
+            variantAttachment: variantAttachment
+            variantKey: variantKey
+            flagKey: flagKey
+            requestDurationMillis: 6.027456183070403
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          booleanResponse:
+            reason: UNKNOWN_EVALUATION_REASON
+            requestId: requestId
+            segmentKeys:
+            - segmentKeys
+            - segmentKeys
+            enabled: true
+            flagKey: flagKey
+            requestDurationMillis: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          type: VARIANT_EVALUATION_RESPONSE_TYPE
+          errorResponse:
+            reason: UNKNOWN_ERROR_EVALUATION_REASON
+            flagKey: flagKey
+            namespaceKey: namespaceKey
+        - variantResponse:
+            reason: UNKNOWN_EVALUATION_REASON
+            requestId: requestId
+            match: true
+            segmentKeys:
+            - segmentKeys
+            - segmentKeys
+            variantAttachment: variantAttachment
+            variantKey: variantKey
+            flagKey: flagKey
+            requestDurationMillis: 6.027456183070403
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          booleanResponse:
+            reason: UNKNOWN_EVALUATION_REASON
+            requestId: requestId
+            segmentKeys:
+            - segmentKeys
+            - segmentKeys
+            enabled: true
+            flagKey: flagKey
+            requestDurationMillis: 0.8008281904610115
+            timestamp: 2000-01-23T04:56:07.000+00:00
+          type: VARIANT_EVALUATION_RESPONSE_TYPE
+          errorResponse:
+            reason: UNKNOWN_ERROR_EVALUATION_REASON
+            flagKey: flagKey
+            namespaceKey: namespaceKey
+        requestDurationMillis: 1.4658129805029452
+      properties:
+        requestId:
+          type: string
+        responses:
+          items:
+            $ref: "#/components/schemas/EvaluationResponse"
+          type: array
+        requestDurationMillis:
+          format: double
+          type: number
+      type: object
+    BooleanEvaluationResponse:
+      example:
+        reason: UNKNOWN_EVALUATION_REASON
+        requestId: requestId
+        segmentKeys:
+        - segmentKeys
+        - segmentKeys
+        enabled: true
+        flagKey: flagKey
+        requestDurationMillis: 0.8008281904610115
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        enabled:
+          type: boolean
+        reason:
+          enum:
+          - UNKNOWN_EVALUATION_REASON
+          - FLAG_DISABLED_EVALUATION_REASON
+          - MATCH_EVALUATION_REASON
+          - DEFAULT_EVALUATION_REASON
+          format: enum
+          type: string
+        requestId:
+          type: string
+        requestDurationMillis:
+          format: double
+          type: number
+        timestamp:
+          format: date-time
+          type: string
+        flagKey:
+          type: string
+        segmentKeys:
+          items:
+            type: string
+          type: array
+      type: object
+    BulkEvaluationResponse:
+      example:
+        flags:
+        - reason: UNKNOWN
+          metadata: "{}"
+          variant: variant
+          value: ""
+          key: key
+        - reason: UNKNOWN
+          metadata: "{}"
+          variant: variant
+          value: ""
+          key: key
+      properties:
+        flags:
+          items:
+            $ref: "#/components/schemas/EvaluatedFlag"
+          type: array
+      required:
+      - flags
+      type: object
+    CacheInvalidation:
+      example:
+        polling:
+          enabled: true
+          minPollingIntervalMs: 0
+      properties:
+        polling:
+          $ref: "#/components/schemas/Polling"
+      type: object
+    CallbackResponse:
+      example:
+        clientToken: clientToken
+        authentication:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            key: metadata
+          method: METHOD_NONE
+          id: id
+          expiresAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        clientToken:
+          type: string
+        authentication:
+          $ref: "#/components/schemas/Authentication"
+      type: object
+    Capabilities:
+      example:
+        flagEvaluation:
+          supportedTypes:
+          - supportedTypes
+          - supportedTypes
+        cacheInvalidation:
+          polling:
+            enabled: true
+            minPollingIntervalMs: 0
+      properties:
+        cacheInvalidation:
+          $ref: "#/components/schemas/CacheInvalidation"
+        flagEvaluation:
+          $ref: "#/components/schemas/FlagEvaluation"
+      type: object
+    Constraint:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        segmentKey: segmentKey
+        property: property
+        description: description
+        id: id
+        type: UNKNOWN_COMPARISON_TYPE
+        value: value
+        operator: operator
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        namespaceKey: namespaceKey
+      properties:
+        id:
+          type: string
+        segmentKey:
+          type: string
+        type:
+          enum:
+          - UNKNOWN_COMPARISON_TYPE
+          - STRING_COMPARISON_TYPE
+          - NUMBER_COMPARISON_TYPE
+          - BOOLEAN_COMPARISON_TYPE
+          - DATETIME_COMPARISON_TYPE
+          - ENTITY_ID_COMPARISON_TYPE
+          format: enum
+          type: string
+        property:
+          type: string
+        operator:
+          type: string
+        value:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        namespaceKey:
+          type: string
+        description:
+          type: string
+      type: object
+    CreateConstraintRequest:
+      example:
+        segmentKey: segmentKey
+        property: property
+        description: description
+        type: UNKNOWN_COMPARISON_TYPE
+        value: value
+        operator: operator
+        namespaceKey: namespaceKey
+      properties:
+        segmentKey:
+          type: string
+        type:
+          enum:
+          - UNKNOWN_COMPARISON_TYPE
+          - STRING_COMPARISON_TYPE
+          - NUMBER_COMPARISON_TYPE
+          - BOOLEAN_COMPARISON_TYPE
+          - DATETIME_COMPARISON_TYPE
+          - ENTITY_ID_COMPARISON_TYPE
+          format: enum
+          type: string
+        property:
+          type: string
+        operator:
+          type: string
+        value:
+          type: string
+        namespaceKey:
+          type: string
+        description:
+          type: string
+      required:
+      - operator
+      - property
+      - type
+      type: object
+    CreateDistributionRequest:
+      example:
+        rollout: 0.8008282
+        variantId: variantId
+        ruleId: ruleId
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        flagKey:
+          type: string
+        ruleId:
+          type: string
+        variantId:
+          type: string
+        rollout:
+          format: float
+          type: number
+        namespaceKey:
+          type: string
+      required:
+      - rollout
+      - variantId
+      type: object
+    CreateFlagRequest:
+      example:
+        metadata: "{}"
+        name: name
+        description: description
+        type: VARIANT_FLAG_TYPE
+        key: key
+        enabled: true
+        namespaceKey: namespaceKey
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        namespaceKey:
+          type: string
+        type:
+          enum:
+          - VARIANT_FLAG_TYPE
+          - BOOLEAN_FLAG_TYPE
+          format: enum
+          type: string
+        metadata:
+          type: object
+      required:
+      - key
+      - name
+      - type
+      type: object
+    CreateNamespaceRequest:
+      example:
+        name: name
+        description: description
+        key: key
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      required:
+      - key
+      - name
+      type: object
+    CreateRolloutRequest:
+      example:
+        segment:
+          segmentKey: segmentKey
+          segmentKeys:
+          - segmentKeys
+          - segmentKeys
+          segmentOperator: OR_SEGMENT_OPERATOR
+          value: true
+        rank: 0
+        description: description
+        threshold:
+          percentage: 6.0274563
+          value: true
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        namespaceKey:
+          type: string
+        flagKey:
+          type: string
+        rank:
+          format: int32
+          type: integer
+        description:
+          type: string
+        segment:
+          $ref: "#/components/schemas/RolloutSegment"
+        threshold:
+          $ref: "#/components/schemas/RolloutThreshold"
+      required:
+      - rank
+      type: object
+    CreateRuleRequest:
+      example:
+        segmentKey: segmentKey
+        segmentKeys:
+        - segmentKeys
+        - segmentKeys
+        rank: 0
+        segmentOperator: OR_SEGMENT_OPERATOR
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        flagKey:
+          type: string
+        segmentKey:
+          type: string
+        rank:
+          format: int32
+          type: integer
+        namespaceKey:
+          type: string
+        segmentKeys:
+          items:
+            type: string
+          type: array
+        segmentOperator:
+          enum:
+          - OR_SEGMENT_OPERATOR
+          - AND_SEGMENT_OPERATOR
+          format: enum
+          type: string
+      required:
+      - rank
+      type: object
+    CreateSegmentRequest:
+      example:
+        matchType: ALL_MATCH_TYPE
+        name: name
+        description: description
+        key: key
+        namespaceKey: namespaceKey
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        matchType:
+          enum:
+          - ALL_MATCH_TYPE
+          - ANY_MATCH_TYPE
+          format: enum
+          type: string
+        namespaceKey:
+          type: string
+      required:
+      - key
+      - matchType
+      - name
+      type: object
+    CreateTokenRequest:
+      example:
+        metadata:
+          key: metadata
+        name: name
+        description: description
+        expiresAt: 2000-01-23T04:56:07.000+00:00
+        namespaceKey: namespaceKey
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        expiresAt:
+          format: date-time
+          type: string
+        namespaceKey:
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    CreateTokenResponse:
+      example:
+        clientToken: clientToken
+        authentication:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            key: metadata
+          method: METHOD_NONE
+          id: id
+          expiresAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        clientToken:
+          type: string
+        authentication:
+          $ref: "#/components/schemas/Authentication"
+      type: object
+    CreateVariantRequest:
+      example:
+        attachment: attachment
+        name: name
+        description: description
+        flagKey: flagKey
+        key: key
+        namespaceKey: namespaceKey
+      properties:
+        flagKey:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        attachment:
+          type: string
+        namespaceKey:
+          type: string
+      required:
+      - key
+      type: object
+    Distribution:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        rollout: 0.8008282
+        id: id
+        variantId: variantId
+        ruleId: ruleId
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        ruleId:
+          type: string
+        variantId:
+          type: string
+        rollout:
+          format: float
+          type: number
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    ErrorEvaluationResponse:
+      example:
+        reason: UNKNOWN_ERROR_EVALUATION_REASON
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        flagKey:
+          type: string
+        namespaceKey:
+          type: string
+        reason:
+          enum:
+          - UNKNOWN_ERROR_EVALUATION_REASON
+          - NOT_FOUND_ERROR_EVALUATION_REASON
+          format: enum
+          type: string
+      type: object
+    EvaluateBulkRequest:
+      example:
+        context:
+          key: context
+      properties:
+        context:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    EvaluateFlagRequest:
+      example:
+        context:
+          key: context
+        key: key
+      properties:
+        key:
+          type: string
+        context:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    EvaluatedFlag:
+      example:
+        reason: UNKNOWN
+        metadata: "{}"
+        variant: variant
+        value: ""
+        key: key
+      properties:
+        key:
+          type: string
+        reason:
+          enum:
+          - UNKNOWN
+          - DISABLED
+          - TARGETING_MATCH
+          - DEFAULT
+          format: enum
+          type: string
+        variant:
+          type: string
+        metadata:
+          type: object
+        value:
+          description: "Represents a dynamically typed value which can be either null,\
+            \ a number, a string, a boolean, a recursive struct value, or a list of\
+            \ values."
+      type: object
+    EvaluationRequest:
+      example:
+        reference: reference
+        requestId: requestId
+        context:
+          key: context
+        entityId: entityId
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        requestId:
+          type: string
+        namespaceKey:
+          type: string
+        flagKey:
+          type: string
+        entityId:
+          type: string
+        context:
+          additionalProperties:
+            type: string
+          type: object
+        reference:
+          type: string
+      required:
+      - context
+      - entityId
+      - flagKey
+      - namespaceKey
+      type: object
+    EvaluationResponse:
+      example:
+        variantResponse:
+          reason: UNKNOWN_EVALUATION_REASON
+          requestId: requestId
+          match: true
+          segmentKeys:
+          - segmentKeys
+          - segmentKeys
+          variantAttachment: variantAttachment
+          variantKey: variantKey
+          flagKey: flagKey
+          requestDurationMillis: 6.027456183070403
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        booleanResponse:
+          reason: UNKNOWN_EVALUATION_REASON
+          requestId: requestId
+          segmentKeys:
+          - segmentKeys
+          - segmentKeys
+          enabled: true
+          flagKey: flagKey
+          requestDurationMillis: 0.8008281904610115
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        type: VARIANT_EVALUATION_RESPONSE_TYPE
+        errorResponse:
+          reason: UNKNOWN_ERROR_EVALUATION_REASON
+          flagKey: flagKey
+          namespaceKey: namespaceKey
+      properties:
+        type:
+          enum:
+          - VARIANT_EVALUATION_RESPONSE_TYPE
+          - BOOLEAN_EVALUATION_RESPONSE_TYPE
+          - ERROR_EVALUATION_RESPONSE_TYPE
+          format: enum
+          type: string
+        booleanResponse:
+          $ref: "#/components/schemas/BooleanEvaluationResponse"
+        variantResponse:
+          $ref: "#/components/schemas/VariantEvaluationResponse"
+        errorResponse:
+          $ref: "#/components/schemas/ErrorEvaluationResponse"
+      type: object
+    Flag:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        metadata: "{}"
+        defaultVariant:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          attachment: attachment
+          name: name
+          description: description
+          id: id
+          flagKey: flagKey
+          key: key
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        name: name
+        description: description
+        variants:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          attachment: attachment
+          name: name
+          description: description
+          id: id
+          flagKey: flagKey
+          key: key
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          attachment: attachment
+          name: name
+          description: description
+          id: id
+          flagKey: flagKey
+          key: key
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        type: VARIANT_FLAG_TYPE
+        key: key
+        enabled: true
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        namespaceKey: namespaceKey
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        variants:
+          items:
+            $ref: "#/components/schemas/Variant"
+          type: array
+        namespaceKey:
+          type: string
+        type:
+          enum:
+          - VARIANT_FLAG_TYPE
+          - BOOLEAN_FLAG_TYPE
+          format: enum
+          type: string
+        defaultVariant:
+          $ref: "#/components/schemas/Variant"
+        metadata:
+          type: object
+      type: object
+    FlagEvaluation:
+      example:
+        supportedTypes:
+        - supportedTypes
+        - supportedTypes
+      properties:
+        supportedTypes:
+          items:
+            type: string
+          type: array
+      type: object
+    FlagList:
+      example:
+        nextPageToken: nextPageToken
+        flags:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          metadata: "{}"
+          defaultVariant:
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            attachment: attachment
+            name: name
+            description: description
+            id: id
+            flagKey: flagKey
+            key: key
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          name: name
+          description: description
+          variants:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            attachment: attachment
+            name: name
+            description: description
+            id: id
+            flagKey: flagKey
+            key: key
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            attachment: attachment
+            name: name
+            description: description
+            id: id
+            flagKey: flagKey
+            key: key
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          type: VARIANT_FLAG_TYPE
+          key: key
+          enabled: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          metadata: "{}"
+          defaultVariant:
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            attachment: attachment
+            name: name
+            description: description
+            id: id
+            flagKey: flagKey
+            key: key
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          name: name
+          description: description
+          variants:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            attachment: attachment
+            name: name
+            description: description
+            id: id
+            flagKey: flagKey
+            key: key
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            attachment: attachment
+            name: name
+            description: description
+            id: id
+            flagKey: flagKey
+            key: key
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          type: VARIANT_FLAG_TYPE
+          key: key
+          enabled: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        totalCount: 0
+      properties:
+        flags:
+          items:
+            $ref: "#/components/schemas/Flag"
+          type: array
+        nextPageToken:
+          type: string
+        totalCount:
+          format: int32
+          type: integer
+      type: object
+    GetProviderConfigurationResponse:
+      example:
+        capabilities:
+          flagEvaluation:
+            supportedTypes:
+            - supportedTypes
+            - supportedTypes
+          cacheInvalidation:
+            polling:
+              enabled: true
+              minPollingIntervalMs: 0
+        name: name
+      properties:
+        name:
+          type: string
+        capabilities:
+          $ref: "#/components/schemas/Capabilities"
+      type: object
+    GoogleProtobufValue:
+      description: "Represents a dynamically typed value which can be either null,\
+        \ a number, a string, a boolean, a recursive struct value, or a list of values."
+    ListAuthenticationsResponse:
+      example:
+        nextPageToken: nextPageToken
+        authentications:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            key: metadata
+          method: METHOD_NONE
+          id: id
+          expiresAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            key: metadata
+          method: METHOD_NONE
+          id: id
+          expiresAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        authentications:
+          items:
+            $ref: "#/components/schemas/Authentication"
+          type: array
+        nextPageToken:
+          type: string
+      type: object
+    Namespace:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        protected: true
+        name: name
+        description: description
+        key: key
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        protected:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    NamespaceList:
+      example:
+        nextPageToken: nextPageToken
+        totalCount: 0
+        namespaces:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          protected: true
+          name: name
+          description: description
+          key: key
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          protected: true
+          name: name
+          description: description
+          key: key
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        namespaces:
+          items:
+            $ref: "#/components/schemas/Namespace"
+          type: array
+        nextPageToken:
+          type: string
+        totalCount:
+          format: int32
+          type: integer
+      type: object
+    OrderRolloutsRequest:
+      example:
+        rolloutIds:
+        - rolloutIds
+        - rolloutIds
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        flagKey:
+          type: string
+        namespaceKey:
+          type: string
+        rolloutIds:
+          items:
+            type: string
+          type: array
+      required:
+      - rolloutIds
+      type: object
+    OrderRulesRequest:
+      example:
+        ruleIds:
+        - ruleIds
+        - ruleIds
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        flagKey:
+          type: string
+        ruleIds:
+          items:
+            type: string
+          type: array
+        namespaceKey:
+          type: string
+      required:
+      - ruleIds
+      type: object
+    Polling:
+      example:
+        enabled: true
+        minPollingIntervalMs: 0
+      properties:
+        enabled:
+          type: boolean
+        minPollingIntervalMs:
+          format: uint32
+          type: integer
+      type: object
+    Rollout:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        segment:
+          segmentKey: segmentKey
+          segmentKeys:
+          - segmentKeys
+          - segmentKeys
+          segmentOperator: OR_SEGMENT_OPERATOR
+          value: true
+        rank: 0
+        description: description
+        threshold:
+          percentage: 6.0274563
+          value: true
+        id: id
+        type: UNKNOWN_ROLLOUT_TYPE
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        namespaceKey:
+          type: string
+        flagKey:
+          type: string
+        type:
+          enum:
+          - UNKNOWN_ROLLOUT_TYPE
+          - SEGMENT_ROLLOUT_TYPE
+          - THRESHOLD_ROLLOUT_TYPE
+          format: enum
+          type: string
+        rank:
+          format: int32
+          type: integer
+        description:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        segment:
+          $ref: "#/components/schemas/RolloutSegment"
+        threshold:
+          $ref: "#/components/schemas/RolloutThreshold"
+      type: object
+    RolloutList:
+      example:
+        nextPageToken: nextPageToken
+        rules:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          segment:
+            segmentKey: segmentKey
+            segmentKeys:
+            - segmentKeys
+            - segmentKeys
+            segmentOperator: OR_SEGMENT_OPERATOR
+            value: true
+          rank: 0
+          description: description
+          threshold:
+            percentage: 6.0274563
+            value: true
+          id: id
+          type: UNKNOWN_ROLLOUT_TYPE
+          flagKey: flagKey
+          namespaceKey: namespaceKey
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          segment:
+            segmentKey: segmentKey
+            segmentKeys:
+            - segmentKeys
+            - segmentKeys
+            segmentOperator: OR_SEGMENT_OPERATOR
+            value: true
+          rank: 0
+          description: description
+          threshold:
+            percentage: 6.0274563
+            value: true
+          id: id
+          type: UNKNOWN_ROLLOUT_TYPE
+          flagKey: flagKey
+          namespaceKey: namespaceKey
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        totalCount: 1
+      properties:
+        rules:
+          items:
+            $ref: "#/components/schemas/Rollout"
+          type: array
+        nextPageToken:
+          type: string
+        totalCount:
+          format: int32
+          type: integer
+      type: object
+    RolloutSegment:
+      example:
+        segmentKey: segmentKey
+        segmentKeys:
+        - segmentKeys
+        - segmentKeys
+        segmentOperator: OR_SEGMENT_OPERATOR
+        value: true
+      properties:
+        segmentKey:
+          type: string
+        value:
+          type: boolean
+        segmentKeys:
+          items:
+            type: string
+          type: array
+        segmentOperator:
+          enum:
+          - OR_SEGMENT_OPERATOR
+          - AND_SEGMENT_OPERATOR
+          format: enum
+          type: string
+      type: object
+    RolloutThreshold:
+      example:
+        percentage: 6.0274563
+        value: true
+      properties:
+        percentage:
+          format: float
+          type: number
+        value:
+          type: boolean
+      type: object
+    Rule:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        segmentKey: segmentKey
+        segmentKeys:
+        - segmentKeys
+        - segmentKeys
+        rank: 6
+        id: id
+        segmentOperator: OR_SEGMENT_OPERATOR
+        flagKey: flagKey
+        distributions:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          rollout: 0.8008282
+          id: id
+          variantId: variantId
+          ruleId: ruleId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          rollout: 0.8008282
+          id: id
+          variantId: variantId
+          ruleId: ruleId
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        namespaceKey: namespaceKey
+      properties:
+        id:
+          type: string
+        flagKey:
+          type: string
+        segmentKey:
+          type: string
+        distributions:
+          items:
+            $ref: "#/components/schemas/Distribution"
+          type: array
+        rank:
+          format: int32
+          type: integer
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        namespaceKey:
+          type: string
+        segmentKeys:
+          items:
+            type: string
+          type: array
+        segmentOperator:
+          enum:
+          - OR_SEGMENT_OPERATOR
+          - AND_SEGMENT_OPERATOR
+          format: enum
+          type: string
+      type: object
+    RuleList:
+      example:
+        nextPageToken: nextPageToken
+        rules:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          segmentKey: segmentKey
+          segmentKeys:
+          - segmentKeys
+          - segmentKeys
+          rank: 6
+          id: id
+          segmentOperator: OR_SEGMENT_OPERATOR
+          flagKey: flagKey
+          distributions:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            rollout: 0.8008282
+            id: id
+            variantId: variantId
+            ruleId: ruleId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            rollout: 0.8008282
+            id: id
+            variantId: variantId
+            ruleId: ruleId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          segmentKey: segmentKey
+          segmentKeys:
+          - segmentKeys
+          - segmentKeys
+          rank: 6
+          id: id
+          segmentOperator: OR_SEGMENT_OPERATOR
+          flagKey: flagKey
+          distributions:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            rollout: 0.8008282
+            id: id
+            variantId: variantId
+            ruleId: ruleId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            rollout: 0.8008282
+            id: id
+            variantId: variantId
+            ruleId: ruleId
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        totalCount: 1
+      properties:
+        rules:
+          items:
+            $ref: "#/components/schemas/Rule"
+          type: array
+        nextPageToken:
+          type: string
+        totalCount:
+          format: int32
+          type: integer
+      type: object
+    Segment:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        matchType: ALL_MATCH_TYPE
+        name: name
+        description: description
+        constraints:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          segmentKey: segmentKey
+          property: property
+          description: description
+          id: id
+          type: UNKNOWN_COMPARISON_TYPE
+          value: value
+          operator: operator
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          segmentKey: segmentKey
+          property: property
+          description: description
+          id: id
+          type: UNKNOWN_COMPARISON_TYPE
+          value: value
+          operator: operator
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        key: key
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        namespaceKey: namespaceKey
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        constraints:
+          items:
+            $ref: "#/components/schemas/Constraint"
+          type: array
+        matchType:
+          enum:
+          - ALL_MATCH_TYPE
+          - ANY_MATCH_TYPE
+          format: enum
+          type: string
+        namespaceKey:
+          type: string
+      type: object
+    SegmentList:
+      example:
+        nextPageToken: nextPageToken
+        totalCount: 0
+        segments:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          matchType: ALL_MATCH_TYPE
+          name: name
+          description: description
+          constraints:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            segmentKey: segmentKey
+            property: property
+            description: description
+            id: id
+            type: UNKNOWN_COMPARISON_TYPE
+            value: value
+            operator: operator
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            segmentKey: segmentKey
+            property: property
+            description: description
+            id: id
+            type: UNKNOWN_COMPARISON_TYPE
+            value: value
+            operator: operator
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          key: key
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          matchType: ALL_MATCH_TYPE
+          name: name
+          description: description
+          constraints:
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            segmentKey: segmentKey
+            property: property
+            description: description
+            id: id
+            type: UNKNOWN_COMPARISON_TYPE
+            value: value
+            operator: operator
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          - createdAt: 2000-01-23T04:56:07.000+00:00
+            segmentKey: segmentKey
+            property: property
+            description: description
+            id: id
+            type: UNKNOWN_COMPARISON_TYPE
+            value: value
+            operator: operator
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+            namespaceKey: namespaceKey
+          key: key
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          namespaceKey: namespaceKey
+      properties:
+        segments:
+          items:
+            $ref: "#/components/schemas/Segment"
+          type: array
+        nextPageToken:
+          type: string
+        totalCount:
+          format: int32
+          type: integer
+      type: object
+    UpdateConstraintRequest:
+      example:
+        segmentKey: segmentKey
+        property: property
+        description: description
+        id: id
+        type: UNKNOWN_COMPARISON_TYPE
+        value: value
+        operator: operator
+        namespaceKey: namespaceKey
+      properties:
+        id:
+          type: string
+        segmentKey:
+          type: string
+        type:
+          enum:
+          - UNKNOWN_COMPARISON_TYPE
+          - STRING_COMPARISON_TYPE
+          - NUMBER_COMPARISON_TYPE
+          - BOOLEAN_COMPARISON_TYPE
+          - DATETIME_COMPARISON_TYPE
+          - ENTITY_ID_COMPARISON_TYPE
+          format: enum
+          type: string
+        property:
+          type: string
+        operator:
+          type: string
+        value:
+          type: string
+        namespaceKey:
+          type: string
+        description:
+          type: string
+      required:
+      - operator
+      - property
+      - type
+      type: object
+    UpdateDistributionRequest:
+      example:
+        rollout: 0.8008282
+        id: id
+        variantId: variantId
+        ruleId: ruleId
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        id:
+          type: string
+        flagKey:
+          type: string
+        ruleId:
+          type: string
+        variantId:
+          type: string
+        rollout:
+          format: float
+          type: number
+        namespaceKey:
+          type: string
+      required:
+      - rollout
+      - variantId
+      type: object
+    UpdateFlagRequest:
+      example:
+        defaultVariantId: defaultVariantId
+        metadata: "{}"
+        name: name
+        description: description
+        key: key
+        enabled: true
+        namespaceKey: namespaceKey
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        namespaceKey:
+          type: string
+        defaultVariantId:
+          type: string
+        metadata:
+          type: object
+      required:
+      - name
+      type: object
+    UpdateNamespaceRequest:
+      example:
+        name: name
+        description: description
+        key: key
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+      required:
+      - name
+      type: object
+    UpdateRolloutRequest:
+      example:
+        segment:
+          segmentKey: segmentKey
+          segmentKeys:
+          - segmentKeys
+          - segmentKeys
+          segmentOperator: OR_SEGMENT_OPERATOR
+          value: true
+        description: description
+        threshold:
+          percentage: 6.0274563
+          value: true
+        id: id
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        id:
+          type: string
+        namespaceKey:
+          type: string
+        flagKey:
+          type: string
+        description:
+          type: string
+        segment:
+          $ref: "#/components/schemas/RolloutSegment"
+        threshold:
+          $ref: "#/components/schemas/RolloutThreshold"
+      type: object
+    UpdateRuleRequest:
+      example:
+        segmentKey: segmentKey
+        segmentKeys:
+        - segmentKeys
+        - segmentKeys
+        id: id
+        segmentOperator: OR_SEGMENT_OPERATOR
+        flagKey: flagKey
+        namespaceKey: namespaceKey
+      properties:
+        id:
+          type: string
+        flagKey:
+          type: string
+        segmentKey:
+          type: string
+        namespaceKey:
+          type: string
+        segmentKeys:
+          items:
+            type: string
+          type: array
+        segmentOperator:
+          enum:
+          - OR_SEGMENT_OPERATOR
+          - AND_SEGMENT_OPERATOR
+          format: enum
+          type: string
+      type: object
+    UpdateSegmentRequest:
+      example:
+        matchType: ALL_MATCH_TYPE
+        name: name
+        description: description
+        key: key
+        namespaceKey: namespaceKey
+      properties:
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        matchType:
+          enum:
+          - ALL_MATCH_TYPE
+          - ANY_MATCH_TYPE
+          format: enum
+          type: string
+        namespaceKey:
+          type: string
+      required:
+      - matchType
+      - name
+      type: object
+    UpdateVariantRequest:
+      example:
+        attachment: attachment
+        name: name
+        description: description
+        id: id
+        flagKey: flagKey
+        key: key
+        namespaceKey: namespaceKey
+      properties:
+        id:
+          type: string
+        flagKey:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        attachment:
+          type: string
+        namespaceKey:
+          type: string
+      required:
+      - key
+      type: object
+    Variant:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        attachment: attachment
+        name: name
+        description: description
+        id: id
+        flagKey: flagKey
+        key: key
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        namespaceKey: namespaceKey
+      properties:
+        id:
+          type: string
+        flagKey:
+          type: string
+        key:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        attachment:
+          type: string
+        namespaceKey:
+          type: string
+      type: object
+    VariantEvaluationResponse:
+      example:
+        reason: UNKNOWN_EVALUATION_REASON
+        requestId: requestId
+        match: true
+        segmentKeys:
+        - segmentKeys
+        - segmentKeys
+        variantAttachment: variantAttachment
+        variantKey: variantKey
+        flagKey: flagKey
+        requestDurationMillis: 6.027456183070403
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        match:
+          type: boolean
+        segmentKeys:
+          items:
+            type: string
+          type: array
+        reason:
+          enum:
+          - UNKNOWN_EVALUATION_REASON
+          - FLAG_DISABLED_EVALUATION_REASON
+          - MATCH_EVALUATION_REASON
+          - DEFAULT_EVALUATION_REASON
+          format: enum
+          type: string
+        variantKey:
+          type: string
+        variantAttachment:
+          type: string
+        requestId:
+          type: string
+        requestDurationMillis:
+          format: double
+          type: number
+        timestamp:
+          format: date-time
+          type: string
+        flagKey:
+          type: string
+      type: object
+    VerifyServiceAccountRequest:
+      example:
+        serviceAccountToken: serviceAccountToken
+      properties:
+        serviceAccountToken:
+          type: string
+      type: object
+    VerifyServiceAccountResponse:
+      example:
+        clientToken: clientToken
+        authentication:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          metadata:
+            key: metadata
+          method: METHOD_NONE
+          id: id
+          expiresAt: 2000-01-23T04:56:07.000+00:00
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        clientToken:
+          type: string
+        authentication:
+          $ref: "#/components/schemas/Authentication"
+      type: object
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+    jwtAuth:
+      scheme: JWT
+      type: http
