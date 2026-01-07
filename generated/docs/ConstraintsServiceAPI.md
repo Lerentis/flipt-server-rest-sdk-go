@@ -25,7 +25,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 )
 
 func main() {
@@ -98,7 +98,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 )
 
 func main() {
@@ -170,7 +170,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 )
 
 func main() {

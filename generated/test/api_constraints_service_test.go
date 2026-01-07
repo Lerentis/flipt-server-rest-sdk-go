@@ -11,10 +11,10 @@ package flipt
 
 import (
 	"context"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
 )
 
 func Test_flipt_ConstraintsServiceAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_flipt_ConstraintsServiceAPIService(t *testing.T) {
 
 	t.Run("Test ConstraintsServiceAPIService CreateConstraint", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var segmentKey string
@@ -39,7 +39,7 @@ func Test_flipt_ConstraintsServiceAPIService(t *testing.T) {
 
 	t.Run("Test ConstraintsServiceAPIService DeleteConstraint", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var segmentKey string
@@ -54,7 +54,7 @@ func Test_flipt_ConstraintsServiceAPIService(t *testing.T) {
 
 	t.Run("Test ConstraintsServiceAPIService UpdateConstraint", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var segmentKey string

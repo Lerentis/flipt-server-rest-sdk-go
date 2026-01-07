@@ -11,10 +11,10 @@ package flipt
 
 import (
 	"context"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
 )
 
 func Test_flipt_SegmentsServiceAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_flipt_SegmentsServiceAPIService(t *testing.T) {
 
 	t.Run("Test SegmentsServiceAPIService CreateSegment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 
@@ -38,7 +38,7 @@ func Test_flipt_SegmentsServiceAPIService(t *testing.T) {
 
 	t.Run("Test SegmentsServiceAPIService DeleteSegment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var key string
@@ -52,7 +52,7 @@ func Test_flipt_SegmentsServiceAPIService(t *testing.T) {
 
 	t.Run("Test SegmentsServiceAPIService GetSegment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var key string
@@ -67,7 +67,7 @@ func Test_flipt_SegmentsServiceAPIService(t *testing.T) {
 
 	t.Run("Test SegmentsServiceAPIService ListSegments", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 
@@ -81,7 +81,7 @@ func Test_flipt_SegmentsServiceAPIService(t *testing.T) {
 
 	t.Run("Test SegmentsServiceAPIService UpdateSegment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var key string

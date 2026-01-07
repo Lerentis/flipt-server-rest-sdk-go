@@ -11,10 +11,10 @@ package flipt
 
 import (
 	"context"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
 )
 
 func Test_flipt_FlagsServiceAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_flipt_FlagsServiceAPIService(t *testing.T) {
 
 	t.Run("Test FlagsServiceAPIService CreateFlag", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 
@@ -38,7 +38,7 @@ func Test_flipt_FlagsServiceAPIService(t *testing.T) {
 
 	t.Run("Test FlagsServiceAPIService DeleteFlag", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var key string
@@ -52,7 +52,7 @@ func Test_flipt_FlagsServiceAPIService(t *testing.T) {
 
 	t.Run("Test FlagsServiceAPIService GetFlag", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var key string
@@ -67,7 +67,7 @@ func Test_flipt_FlagsServiceAPIService(t *testing.T) {
 
 	t.Run("Test FlagsServiceAPIService ListFlags", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 
@@ -81,7 +81,7 @@ func Test_flipt_FlagsServiceAPIService(t *testing.T) {
 
 	t.Run("Test FlagsServiceAPIService UpdateFlag", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var key string

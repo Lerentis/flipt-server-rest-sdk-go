@@ -118,7 +118,7 @@ def main():
     print("=" * 60)
     print(f"\nNext steps:")
     print(f"  cd {OUTPUT_DIR}")
-    print(f"  go mod init github.com/lerentis/flipt-server-rest-sdk-go")
+    print(f"  go mod init github.com/lerentis/flipt-server-rest-sdk-go/generated")
     print(f"  go mod tidy")
 
 if __name__ == "__main__":

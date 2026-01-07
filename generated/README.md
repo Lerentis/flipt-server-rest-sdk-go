@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import flipt "github.com/lerentis/flipt-server-rest-sdk-go"
+import flipt "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:

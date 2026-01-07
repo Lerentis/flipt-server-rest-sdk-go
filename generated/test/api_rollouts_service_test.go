@@ -11,10 +11,10 @@ package flipt
 
 import (
 	"context"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
 )
 
 func Test_flipt_RolloutsServiceAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_flipt_RolloutsServiceAPIService(t *testing.T) {
 
 	t.Run("Test RolloutsServiceAPIService CreateRollout", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var flagKey string
@@ -39,7 +39,7 @@ func Test_flipt_RolloutsServiceAPIService(t *testing.T) {
 
 	t.Run("Test RolloutsServiceAPIService DeleteRollout", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var flagKey string
@@ -54,7 +54,7 @@ func Test_flipt_RolloutsServiceAPIService(t *testing.T) {
 
 	t.Run("Test RolloutsServiceAPIService GetRollout", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var flagKey string
@@ -70,7 +70,7 @@ func Test_flipt_RolloutsServiceAPIService(t *testing.T) {
 
 	t.Run("Test RolloutsServiceAPIService ListRollouts", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var flagKey string
@@ -85,7 +85,7 @@ func Test_flipt_RolloutsServiceAPIService(t *testing.T) {
 
 	t.Run("Test RolloutsServiceAPIService OrderRollouts", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var flagKey string
@@ -99,7 +99,7 @@ func Test_flipt_RolloutsServiceAPIService(t *testing.T) {
 
 	t.Run("Test RolloutsServiceAPIService UpdateRollout", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var namespaceKey string
 		var flagKey string

@@ -11,10 +11,10 @@ package flipt
 
 import (
 	"context"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
 )
 
 func Test_flipt_EvaluationServiceAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_flipt_EvaluationServiceAPIService(t *testing.T) {
 
 	t.Run("Test EvaluationServiceAPIService EvaluateBatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.EvaluationServiceAPI.EvaluateBatch(context.Background()).Execute()
 
@@ -36,7 +36,7 @@ func Test_flipt_EvaluationServiceAPIService(t *testing.T) {
 
 	t.Run("Test EvaluationServiceAPIService EvaluateBoolean", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.EvaluationServiceAPI.EvaluateBoolean(context.Background()).Execute()
 
@@ -48,7 +48,7 @@ func Test_flipt_EvaluationServiceAPIService(t *testing.T) {
 
 	t.Run("Test EvaluationServiceAPIService EvaluateVariant", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.EvaluationServiceAPI.EvaluateVariant(context.Background()).Execute()
 

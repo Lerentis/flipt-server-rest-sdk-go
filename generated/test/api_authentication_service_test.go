@@ -11,10 +11,10 @@ package flipt
 
 import (
 	"context"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
 )
 
 func Test_flipt_AuthenticationServiceAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_flipt_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService DeleteAuthToken", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 
@@ -37,7 +37,7 @@ func Test_flipt_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService ExpireAuthSelf", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		httpRes, err := apiClient.AuthenticationServiceAPI.ExpireAuthSelf(context.Background()).Execute()
 
@@ -48,7 +48,7 @@ func Test_flipt_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService GetAuthSelf", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AuthenticationServiceAPI.GetAuthSelf(context.Background()).Execute()
 
@@ -60,7 +60,7 @@ func Test_flipt_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService GetAuthToken", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var id string
 
@@ -74,7 +74,7 @@ func Test_flipt_AuthenticationServiceAPIService(t *testing.T) {
 
 	t.Run("Test AuthenticationServiceAPIService ListAuthTokens", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.AuthenticationServiceAPI.ListAuthTokens(context.Background()).Execute()
 

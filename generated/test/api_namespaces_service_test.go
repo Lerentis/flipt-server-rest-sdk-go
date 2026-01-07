@@ -11,10 +11,10 @@ package flipt
 
 import (
 	"context"
+	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go/generated"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/lerentis/flipt-server-rest-sdk-go"
 )
 
 func Test_flipt_NamespacesServiceAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_flipt_NamespacesServiceAPIService(t *testing.T) {
 
 	t.Run("Test NamespacesServiceAPIService CreateNamespace", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.NamespacesServiceAPI.CreateNamespace(context.Background()).Execute()
 
@@ -36,7 +36,7 @@ func Test_flipt_NamespacesServiceAPIService(t *testing.T) {
 
 	t.Run("Test NamespacesServiceAPIService DeleteNamespace", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var key string
 
@@ -49,7 +49,7 @@ func Test_flipt_NamespacesServiceAPIService(t *testing.T) {
 
 	t.Run("Test NamespacesServiceAPIService GetNamespace", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var key string
 
@@ -63,7 +63,7 @@ func Test_flipt_NamespacesServiceAPIService(t *testing.T) {
 
 	t.Run("Test NamespacesServiceAPIService ListNamespaces", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.NamespacesServiceAPI.ListNamespaces(context.Background()).Execute()
 
@@ -75,7 +75,7 @@ func Test_flipt_NamespacesServiceAPIService(t *testing.T) {
 
 	t.Run("Test NamespacesServiceAPIService UpdateNamespace", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var key string
 
