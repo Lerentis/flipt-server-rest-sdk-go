@@ -1,4 +1,4 @@
-module github.com/lerentis/flipt-server-rest-sdk-go/generated
+module github.com/lerentis/flipt-server-rest-sdk-go
 
 go 1.23
 
